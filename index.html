@@ -40,76 +40,80 @@
                     <div class="card">
                         <div class="card-header">Add Student</div>
                         <div class="card-body">
-                            <form name="my-form" onsubmit="return validform()" action="success.php" method="">
+                            <form action="save.php" id="form">
                                 <div class="form-group row">
-                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">First Name</label>
+                                    <label for="first_name" class="col-md-4 col-form-label text-md-right">First Name</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="full_name" class="form-control" name="full-name">
+                                    <input type="text" class="form-control" name="first_name">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Last Name</label>
+                                    <label for="last_name" class="col-md-4 col-form-label text-md-right">Last Name</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="email_address" class="form-control" name="email-address">
+                                        <input type="text" class="form-control" name="last_name">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Birthday</label>
+                                    <label for="birthday" class="col-md-4 col-form-label text-md-right">Birthday</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="user_name" class="form-control" name="username">
+                                        <input type="text" class="form-control" name="birthday">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">Address</label>
+                                    <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="phone_number" class="form-control">
+                                        <input type="text" class="form-control" class="address">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="present_address" class="col-md-4 col-form-label text-md-right">Course</label>
+                                    <label for="course" class="col-md-4 col-form-label text-md-right">Course</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="present_address" class="form-control">
+                                        <input type="text" class="form-control" class="course">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="present_address" class="col-md-4 col-form-label text-md-right">Year</label>
+                                    <label for="year" class="col-md-4 col-form-label text-md-right">Year</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="present_address" class="form-control">
+                                        <input type="text" class="form-control" class="year">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="present_address" class="col-md-4 col-form-label text-md-right">Email</label>
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="present_address" class="form-control">
+                                        <input type="text" class="form-control" class="email">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="present_address" class="col-md-4 col-form-label text-md-right">Phone Number</label>
+                                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="present_address" class="form-control">
+                                        <input type="text" class="form-control" class="phone_number">
                                     </div>
                                 </div>
-
+                            
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                        Add Student
+                                        <button type="button" class="btn btn-primary" id="btnSubmit">
+                                        Add Students
                                         </button>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
             </div>
         </div>
     </div>
     <br>
+    <div class="col-md-8">
+        <h3>List of Students</h3>
+        <div id="student-list"></div>
+    </div>
     <div class="panel-body table-responsive">
         <table class="table table-striped table-bordered table-list">
           <thead>
@@ -125,21 +129,56 @@
                 <th>Phone Number</th>
             </tr> 
           </thead>
-          <tbody id="myTable">
-                  <tr>
-                    <td align="center">
-                      <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                      <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+<div class="modal" id="edit-student-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Employee</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="update.php" id="edit-form">
+                    <input class="form-control" type="hidden" name="id">
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input class="form-control" type="text" name="first_name">
+                      </div>
+                      <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input class="form-control" type="text" name="last_name">
+                      </div>
+                      <div class="form-group">
+                        <label for="birthday">Birthday</label>
+                        <input class="form-control" type="text" name="birthday">
+                      </div>
+                      <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" type="text" name="address" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="address">Course</label>
+                        <textarea class="form-control" type="text" name="course" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="year">Year</label>
+                        <textarea class="form-control" type="text" name="year" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <textarea class="form-control" type="text" name="email" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <textarea class="form-control" type="text" name="phone_number" rows="3"></textarea>
+                      </div>
+                      <button type="button" class="btn btn-primary" id="btnUpdateSubmit">Update</button>
+                      <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+                </form>
+            </tbody>
+        </div>
+    </div>
+</div>
 </main>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
